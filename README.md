@@ -1,4 +1,4 @@
-# Widget tarjeta de transporte de Galicia para Scriptable
+# Widget TMG para Scriptable
 
 Widget de la tarjeta de transporte de Galicia (TMG / Xente Nova) para Scriptable (iOS)
 
