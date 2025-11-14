@@ -2,47 +2,49 @@
 // These must be at the very top of the file. Do not edit.
 // icon-color: blue; icon-glyph: magic;
 /*
- Scrip hecho por Jose Manuel
+ MIT License
+
+ Copyright (c) 2025 Jose Manuel Delgado Chapela
  Sólo funciona con la app Scriptable en iOS.
  El script muestra el saldo de la tarjeta TMG en un widget.
  Requiere tener un archivo JSON con el saldo y los trayectos en iCloud Drive.
 */
 let items = await loadItems()
-class Pill{
-  constructor(tipo,saldo, nombre, precio, stack){
+class Pill {
+  constructor(tipo, saldo, nombre, precio, stack) {
     let pill = stack.addStack();
     pill.centerAlignContent()
     pill.cornerRadius = 15;
     pill.setPadding(2, 5, 2, 5);
     let gray = new Color("#DEDEDE", 1);
     let sym;
-    switch(tipo){
+    switch (tipo) {
       case "bus":
-         sym = SFSymbol.named("bus.fill");
+        sym = SFSymbol.named("bus.fill");
         break;
       case "barco":
-         sym = SFSymbol.named("ferry.fill");
+        sym = SFSymbol.named("ferry.fill");
         break;
       case "tren":
-         sym = SFSymbol.named("train.side.front.car");
+        sym = SFSymbol.named("train.side.front.car");
         break;
     }
-    let icon= pill.addImage(sym.image);
-//     icon.resizable=false;
-icon.tintColor=gray;
-    icon.imageSize=new Size(20, 20)
+    let icon = pill.addImage(sym.image);
+    //     icon.resizable=false;
+    icon.tintColor = gray;
+    icon.imageSize = new Size(20, 20)
     pill.addSpacer(2)
     let viajesRestantes = Math.trunc(saldo / precio);
-    let label = pill.addText(nombre+" "+ viajesRestantes.toString());
-    label.textColor=gray;
+    let label = pill.addText(nombre + " " + viajesRestantes.toString());
+    label.textColor = gray;
     label.font = Font.boldMonospacedSystemFont(15);
-    if(viajesRestantes>0){
+    if (viajesRestantes > 0) {
       pill.backgroundColor = new Color("#00FF1E", 0.5);
-    }else{
+    } else {
       pill.backgroundColor = new Color("#FF0000", 0.5);
     }
   }
-      
+
 }
 if (config.runsInWidget) {
   // Tell the widget on the Home Screen to show our ListWidget instance.
@@ -86,7 +88,7 @@ async function createWidget(items) {
   widget.setPadding(20, 20, 20, 20);
 
 
-  
+
 
 
   //     widget.backgroundImage = img;
@@ -133,18 +135,18 @@ async function createWidget(items) {
   viajesLabel.font = Font.boldSystemFont(12);
 
   verticalLayout2.addSpacer(10);
-  Object.entries(datos.trayectos).forEach(([nombre,trayecto]) => {
-    let pill=new Pill(trayecto.tipo,datos.saldo,nombre,trayecto.precio, verticalLayout2);
+  Object.entries(datos.trayectos).forEach(([nombre, trayecto]) => {
+    let pill = new Pill(trayecto.tipo, datos.saldo, nombre, trayecto.precio, verticalLayout2);
     verticalLayout2.addSpacer(5)
   })
-  
-  
-//   widget.backgroundColor = new Color("#b00a0f")
+
+
+  //   widget.backgroundColor = new Color("#b00a0f")
   //   widget.backgroundGradient = gradient
   // Add spacer above content to center it vertically.
   stack.addSpacer();
   //    widget.addSpacer()
-  
+
   // Add spacing below content to center it vertically.
 
   // Set URL to open when tapping widget.
