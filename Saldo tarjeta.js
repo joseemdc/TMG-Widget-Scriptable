@@ -143,11 +143,11 @@ async function createWidget(items) {
 
   //   widget.backgroundColor = new Color("#b00a0f")
   //   widget.backgroundGradient = gradient
-  // Add spacer above content to center it vertically.
+ 
   stack.addSpacer();
   //    widget.addSpacer()
 
-  // Add spacing below content to center it vertically.
+  
 
   // Set URL to open when tapping widget.
 
@@ -189,22 +189,4 @@ async function loadItems() {
   items.set("imagen", img);
   items.set("datos", datos);
   return items;
-}
-
-function extractImageURL(item) {
-  let regex = /<img src="(.*)" alt="/
-  let html = item["content_html"]
-  let matches = html.match(regex)
-  if (matches && matches.length >= 2) {
-    return matches[1]
-  } else {
-    return null
-  }
-}
-
-function decode(str) {
-  let regex = /&#(\d+);/g
-  return str.replace(regex, (match, dec) => {
-    return String.fromCharCode(dec)
-  })
 }
